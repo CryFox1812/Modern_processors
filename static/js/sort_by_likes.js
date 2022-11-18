@@ -1,14 +1,21 @@
-const cards = document.querySelectorAll('.cards li');
+const cards = document.querySelectorAll('.cards .card_container');
 const button = document.querySelector('.sort');
+const warning = document.querySelector('.warning');
 
 function hide_uninteresting()
 {
+  let cnt = cards.length;
   for(let i = 0; i < cards.length; i++)
   {
     if(localStorage.getItem('like_' + i) == '0')
     {
       cards[i].classList.add('hide');
+      cnt -= 1;
     }
+  }
+  if (cnt == 0) 
+  {
+    warning.style.display = 'flex';
   }
 }
 
@@ -18,6 +25,7 @@ function show_all()
   {
     cards[i].classList.remove('hide');
   }
+  warning.style.display = 'none';
 }
 
 function sort_init()
